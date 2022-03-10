@@ -24,15 +24,11 @@ function sieveOfEratosthenes(sub){
         start = sub[0];
         end = sub[1];
     }
+    if(start===1)start++;
     // 0 symbolised is that number not a prime
     //in start we assume that we have all prime numbers and check it
-    for(let i=0; i <= end; i++){ 
-        if(i < start || i === 1){
-            arrayToCheck.push(0);
-        }else{
-            arrayToCheck.push(i);
-        }
-        
+    for(let i=start; i <= end; i++){
+        arrayToCheck.push(i);
     }
     for(i=0; i < arrayToCheck.length; i++){ 
         if(arrayToCheck[i] !== 0 && isNumberPrime(i)){
@@ -49,4 +45,3 @@ function sieveOfEratosthenes(sub){
     return arrayToCheck.filter((value) => value !== 0);
 }
 
-//2
