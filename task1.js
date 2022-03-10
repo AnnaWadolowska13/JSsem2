@@ -6,9 +6,9 @@ console.log("prime numbers", sieveOfEratosthenes(sub));
 
 
 function isNumberPrime(number){
+    // console.log("prime check", number)
     const squareRoot = Math.sqrt(number);
     for(let i=2; i <= squareRoot; i++){
-        // console.log("prime? ", number);
         if(number%i == 0) return false
     };
     return true;
@@ -24,24 +24,23 @@ function sieveOfEratosthenes(sub){
         start = sub[0];
         end = sub[1];
     }
-    if(start===1)start++;
+    if(start===1)start++; // 1 is not a prime so i skip it
     // 0 symbolised is that number not a prime
     //in start we assume that we have all prime numbers and check it
     for(let i=start; i <= end; i++){
         arrayToCheck.push(i);
     }
+
     for(i=0; i < arrayToCheck.length; i++){ 
-        if(arrayToCheck[i] !== 0 && isNumberPrime(i)){
-            // console.log(i)
-            let j = i+i;
+        if(arrayToCheck[i] !== 0){// if number is not 0 we must to check it
+            let j = arrayToCheck[i] *2; // remove all of multiples
             while(j <= end){
-                arrayToCheck[j]=0;
-                j += i;
+                arrayToCheck[arrayToCheck[i] + i] = 0;
+                j += arrayToCheck[i];
             }
-        }else{
-            arrayToCheck[i]=0;
+            if(!isNumberPrime(arrayToCheck[i])){ arrayToCheck[i]=0;} // remove that number if isn't prime
         }
+        // console.log(arrayToCheck);
     }
     return arrayToCheck.filter((value) => value !== 0);
 }
-
